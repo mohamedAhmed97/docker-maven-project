@@ -8,7 +8,7 @@ pipeline{
             steps{
                 script{
                     echo "========bulding jar========"
-                    sh 'mvn package'
+                    // sh 'mvn package'
                 }
             }
         }
