@@ -16,7 +16,7 @@ pipeline{
             steps{
                 script{
                     echo "=========== bulding image ============"
-                    withCredentials(['UsernamePassword', credentialsId:'docker-hub-credentials',
+                    withCredentials(['usernamePassword', credentialsId:'docker-hub-credentials',
                         usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'
                     ])
 
