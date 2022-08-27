@@ -25,13 +25,15 @@ pipeline{
             }
         }
     }
-    steps{
+    post{
+        always{
+            echo "========always========"
+        }
         success{
-            echo "Done ===============>"
+            echo "========pipeline executed successfully ========"
         }
         failure{
-            echo "Failure ============>"
+            echo "========pipeline execution failed========"
         }
     }
-    
 }
