@@ -7,11 +7,6 @@ pipeline{
     }
     stages{
         stage("bulding jar"){
-            when{
-                experssion{
-                    BRANCH_NAME=="stage"
-                }
-            }
             steps{
                 script{
                    buildJar()
@@ -19,11 +14,6 @@ pipeline{
             }
         }
            stage("testing"){
-            when{
-                experssion{
-                    BRANCH_NAME=="test"
-                }
-            }
             steps{
                 script{
                     echo "========testing jar========"
@@ -33,11 +23,6 @@ pipeline{
         }
         stage("bulding image"){
             steps{
-                 when{
-                    experssion{
-                        BRANCH_NAME=="production"
-                    }
-             }
                 script{
                     echo "=========== bulding image ============"
                     buildImage()
