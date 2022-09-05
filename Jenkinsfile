@@ -1,3 +1,5 @@
+@Library("First-SL")
+def gv
 pipeline{
     agent any
     tools{
@@ -5,22 +7,40 @@ pipeline{
     }
     stages{
         stage("bulding jar"){
+            when{
+                experssion{
+                    BRANCH_NAME=="stage"
+                }
+            }
             steps{
                 script{
-                    echo "========bulding jar========"
+                   buildJar()
+                }
+            }
+        }
+           stage("testing"){
+            when{
+                experssion{
+                    BRANCH_NAME=="test"
+                }
+            }
+            steps{
+                script{
+                    echo "========testing jar========"
                     // sh 'mvn package'
                 }
             }
         }
         stage("bulding image"){
             steps{
+                 when{
+                    experssion{
+                        BRANCH_NAME=="production"
+                    }
+             }
                 script{
                     echo "=========== bulding image ============"
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {  
-                        sh "docker build -t mar97/first-repositary:1.2 ."
-                        sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
-                        sh "docker push mar97/first-repositary:1.2"
-                    }
+                    buildImage()
                 }
             }
         }
