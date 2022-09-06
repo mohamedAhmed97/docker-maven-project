@@ -25,7 +25,9 @@ pipeline{
             steps{
                 script{
                     echo "=========== bulding image ============"
-                    buildImage()
+                    bulidDockerImage "mar97/first-repositary:1.4"
+                    dockerLogin()
+                    dockerPush "mar97/first-repositary:1.4"
                 }
             }
         }
