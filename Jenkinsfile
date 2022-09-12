@@ -30,7 +30,7 @@ pipeline{
                 script{
                     echo "=========== bulding image ============"
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh "docker bulid -t mar97/first-repositary:$IMAGE_VERSION ."
+                        sh "docker build -t mar97/first-repositary:$IMAGE_VERSION ."
                         sh "echo $PASSWORD | docker login -u $USERNAME  --password-stdin"
                         sh "docker push  mar97/first-repositary:$IMAGE_VERSION"
                         }
