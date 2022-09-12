@@ -32,7 +32,7 @@ pipeline{
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh "docekr bulid -t mar97/first-repositary:$IMAGE_VERSION ."
                         sh "echo $PASSWORD | docker login -u $USERNAME  --password-stdin"
-                        sh "docekr push  mar97/first-repositary:$IMAGE_VERSION"
+                        sh "docker push  mar97/first-repositary:$IMAGE_VERSION"
                         }
                 }
             }
