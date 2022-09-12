@@ -8,7 +8,7 @@ pipeline{
             steps{
                 script{
                     echo "=============increment pom version=========="
-                    sh "sudo mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit"
+                    sh "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit"
                     def matcher=readFile("pom.xml")=~'<version>(.+)</version>'
                     def version=matcher[0][1]
                     env.IMAGE_VERSION = "$version-$BUILD_NUMBER"
@@ -28,7 +28,6 @@ pipeline{
             steps{
                 script{
                     echo "=========== bulding image ============"
-                    buildImage "mar97/first-repositary:1.4"
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh "docekr bulid -t mar97/first-repositary:$IMAGE_VERSION ."
                         sh "echo $PASSWORD | docker login -u $USERNAME  --password-stdin"
