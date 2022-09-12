@@ -8,7 +8,7 @@ pipeline{
             steps{
                 script{
                     echo "=============increment pom version=========="
-                    sh "Maven build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit"
+                    sh "mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit"
                     def matcher=readFile("pom.xml")=~'<version>(.+)</version>'
                     def version=matcher[0][1]
                     env.IMAGE_VERSION = "$version-$BUILD_NUMBER"
@@ -19,8 +19,8 @@ pipeline{
             steps{
                   script{
                      echo "=========building jar==========="
-                     sh "Maven clean package"
-                     sh "Maven package"
+                     sh "mvn clean package"
+                     sh "mvn package"
                   }
             }
         }
