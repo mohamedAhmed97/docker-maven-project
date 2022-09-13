@@ -37,6 +37,23 @@ pipeline{
                 }
             }
         }
+        stage("pushing to repo"){
+            steps{
+                script{
+                    withCredentials([usernamePassword(credentialsId: 'github-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh 'git config --global user.email "admin@example.com"'
+                        sh 'git config --global user.name "admin"'
+
+                        sh 'git status'
+                        sh "git remote set-url origin https://${PASSWORD}@github.com/${USERNAME}/docker-maven-project.git"
+
+                        sh "git add ."
+                        sh 'git commit -m "ci: version bumb "'
+                        sh 'git push origin master'
+                    }
+                }   
+            }
+        }
     }
     post{
         always{
