@@ -45,7 +45,7 @@ pipeline{
                         sh 'git config --global user.name "admin"'
 
                         sh 'git status'
-                        sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@github.com/${USERNAME}/docker-maven-project.git"
+                        sh "git remote set-url origin https://${USERNAME}:${PASSWOR}@github.com/${USERNAME}/docker-maven-project.git"
 
                         sh "git add ."
                         sh 'git commit -m "ci: version bumb "'
