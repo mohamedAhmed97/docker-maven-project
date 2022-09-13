@@ -45,7 +45,7 @@ pipeline{
                         sh 'git commit -m "ci: version bumb "'
                         sshagent (credentials: ['github-ssh	']) {
                             sh 'git remote set-url origin git@github.com:mohamedAhmed97/docker-maven-project.git'
-                            sh 'git push origin master'
+                            sh 'git push origin HEAD:master'
                         }
                     }
             }
