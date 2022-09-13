@@ -41,10 +41,6 @@ pipeline{
             steps{
                 script{
                     withCredentials([usernamePassword(credentialsId: 'github-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh 'git config --global user.email "admin@example.com"'
-                        sh 'git config --global user.name "admin"'
-
-                        sh 'git status'
                         sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@github.com/mohamedAhmed97/docker-maven-project.git"
 
                         sh "git add ."
