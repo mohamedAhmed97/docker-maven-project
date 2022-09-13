@@ -40,8 +40,8 @@ pipeline{
         stage("pushing to repo"){
             steps{
                 script{
-                    withCredentials([sshUserPrivateKey(credentialsId: "github-ssh", keyFileVariable: 'keyfile')]) {
-                        sh "git remote set-url origin git@github.com:mohamedAhmed97/docker-maven-project.git"
+                    withCredentials([usernamePassword(credentialsId: 'github-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@github.com/mohamedAhmed97/docker-maven-project.git"
 
                         sh "git add ."
                         sh 'git commit -m "ci: version bumb "'
